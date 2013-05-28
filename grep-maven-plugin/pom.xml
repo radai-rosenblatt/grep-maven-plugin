@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>net.radai</groupId>
+        <artifactId>grep-maven-plugin-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>grep-maven-plugin</artifactId>
+    <packaging>maven-plugin</packaging>
+
+    <name>grep-maven-plugin</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-descriptor</id>
+                        <goals>
+                            <goal>descriptor</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                    <execution>
+                        <id>help-descriptor</id>
+                        <goals>
+                            <goal>helpmojo</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.java.truevfs</groupId>
+            <artifactId>truevfs-profile-default</artifactId>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.slf4j-maven-plugin-log</groupId>
+            <artifactId>slf4j-maven-plugin-log</artifactId>
+        </dependency>
+    </dependencies>
+</project>

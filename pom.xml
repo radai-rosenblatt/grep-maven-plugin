@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.radai</groupId>
+    <artifactId>grep-maven-plugin-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>grep-maven-plugin-parent</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>grep-maven-plugin</module>
+        <module>test-project</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>3.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-plugin-api</artifactId>
+                <version>3.0.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-annotations</artifactId>
+                <scope>provided</scope>
+                <version>3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>net.java.truevfs</groupId>
+                <artifactId>truevfs-profile-default</artifactId>
+                <version>0.10.2</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.19</version>
+            </dependency>
+            <dependency>
+                <groupId>com.googlecode.slf4j-maven-plugin-log</groupId>
+                <artifactId>slf4j-maven-plugin-log</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

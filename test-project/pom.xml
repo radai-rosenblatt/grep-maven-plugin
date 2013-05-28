@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>net.radai</groupId>
+        <artifactId>grep-maven-plugin-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>test-project</artifactId>
+    <packaging>pom</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.radai</groupId>
+                <artifactId>grep-maven-plugin</artifactId>
+                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>grep</goal>
+                        </goals>
+                        <phase>test</phase>
+                        <configuration>
+                            <greps>
+                                <grep>
+                                    <file>src/main/resources/file.txt</file>
+                                    <grepPattern>prop1</grepPattern>
+                                </grep>
+                                <grep>
+                                    <file>src/main/resources/directory/file.txt</file>
+                                    <grepPattern>prop1</grepPattern>
+                                </grep>
+                                <grep>
+                                    <file>src/main/resources/archive.zip/file.txt</file>
+                                    <grepPattern>prop1</grepPattern>
+                                </grep>
+                                <grep>
+                                    <file>src/main/resources/archive.zip/directory/file.txt</file>
+                                    <grepPattern>prop1</grepPattern>
+                                    <outputPattern>found in file ${fileName} at line ${lineNumber} : ${line}</outputPattern>
+                                </grep>
+                            </greps>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
