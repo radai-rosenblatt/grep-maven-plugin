@@ -40,13 +40,13 @@ usage example:
 </code>
 </pre>
 
-to use this you will need to add the following to your maven project:
+to use this you will need to add the Sonatype OSS repository to your maven project:
 <pre>
 <code>
 &lt;pluginRepositories&gt;
    &lt;pluginRepository&gt;
-      &lt;id&gt;radai&lt;/id&gt;
-      &lt;url&gt;https://raw.github.com/radai-rosenblatt/maven-repository/master&lt;/url&gt;
+      &lt;id&gt;ossrh&lt;/id&gt;
+      &lt;url&gt;https://oss.sonatype.org/content/groups/public&lt;/url&gt;
    &lt;/pluginRepository&gt;
 &lt;/pluginRepositories&gt;
 </code>

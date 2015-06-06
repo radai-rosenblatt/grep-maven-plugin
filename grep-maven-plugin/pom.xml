@@ -13,6 +13,23 @@
 
     <name>grep-maven-plugin</name>
 
+    <description>a maven plugin for grepping through text files</description>
+    <url>https://github.com/radai-rosenblatt/grep-maven-plugin</url>
+
+    <licenses>
+        <license>
+            <name>The BSD 2-Clause License</name>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Radai Rosenblatt</name>
+            <email>radai.rosenblatt@gmail.com</email>
+        </developer>
+    </developers>
+
     <build>
         <plugins>
             <plugin>
