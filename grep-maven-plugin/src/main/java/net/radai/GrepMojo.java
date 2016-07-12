@@ -11,9 +11,12 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.slf4j.impl.StaticLoggerBinder;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -59,7 +62,6 @@ public class GrepMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        StaticLoggerBinder.SINGLETON.setLog(getLog()); //take care of slf4j binding to maven plugin logging
         try {
             for (Grep grep : greps) {
                 Pattern lookingFor = Pattern.compile(grep.getGrepPattern());
