@@ -74,9 +74,5 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.googlecode.slf4j-maven-plugin-log</groupId>
-            <artifactId>slf4j-maven-plugin-log</artifactId>
-        </dependency>
     </dependencies>
 </project>
