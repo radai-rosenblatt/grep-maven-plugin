@@ -40,6 +40,10 @@
                                     <grepPattern>prop1</grepPattern>
                                 </grep>
                                 <grep>
+                                    <filePattern>src/main/resources/**/*.txt</filePattern>
+                                    <grepPattern>prop1</grepPattern>
+                                </grep>
+                                <grep>
                                     <file>src/main/resources/archive.zip/directory/file.txt</file>
                                     <grepPattern>prop1</grepPattern>
                                     <outputPattern>found in file ${fileName} at line ${lineNumber} : ${line}</outputPattern>
