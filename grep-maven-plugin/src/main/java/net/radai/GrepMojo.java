@@ -11,6 +11,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.plexus.util.DirectoryScanner;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,8 +20,14 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
+
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
 
 @Mojo(name = "grep", threadSafe = true)
 public class GrepMojo extends AbstractMojo {
@@ -65,13 +72,9 @@ public class GrepMojo extends AbstractMojo {
         try {
             for (Grep grep : greps) {
                 Pattern lookingFor = Pattern.compile(grep.getGrepPattern());
-                if (grep.getFile() != null) {
-                    TFile theFile = new TFile(basedir, grep.getFile());
-                    grepInFile(theFile, lookingFor, grep);
-                    continue;
-                }
-                if (grep.getFilePattern() != null) {
-                    log.error("file patterns not implemented yet");
+                List<TFile> files = getFiles(grep);
+                for (TFile file : files) {
+                    grepInFile(file, lookingFor, grep);
                 }
             }
         } catch (MojoFailureException e) {
@@ -80,6 +83,25 @@ public class GrepMojo extends AbstractMojo {
         } catch (Exception e) {
             throw new MojoFailureException("error grepping", e);
         }
+    }
+
+    private List<TFile> getFiles(Grep grep) {
+        Stream<String> file = streamifyNullable(grep.getFile(), Stream::of);
+        Stream<String> filesMatchingPattern = streamifyNullable(grep.getFilePattern(), this::findFilesMatching);
+        return Stream.concat(file, filesMatchingPattern).map(fileName -> new TFile(basedir, fileName)).collect(toList());
+    }
+
+    private Stream<String> streamifyNullable(String value, Function<String, Stream<String>> steamGenerator) {
+        return Optional.ofNullable(value).map(steamGenerator).orElse(Stream.empty());
+    }
+
+    private Stream<String> findFilesMatching(String filePattern) {
+        DirectoryScanner scanner = new DirectoryScanner();
+        scanner.setIncludes(new String[]{filePattern});
+        scanner.setBasedir(basedir);
+        scanner.setCaseSensitive(false);
+        scanner.scan();
+        return stream(scanner.getIncludedFiles());
     }
 
     private void grepInFile(TFile theFile, Pattern lookingFor, Grep grep) throws Exception {
